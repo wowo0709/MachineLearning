@@ -1,1 +1,4 @@
-# MachineLearning
+# Machine Learning
+
+기본적인 머신러닝 모델들에서 시작해 딥러닝 모델들까지 학습하며 사용한 코드들을 업로드
+
