@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Diabetes Predictor</title>
+<style>
+div.centered{
+	text-align: center;
+}
+fieldset{
+	margin: 15px 10px;
+}
+fieldset legend{
+	font-weight: bold;
+	font-size: 18px;
+	color: blue
+}
+</style>
+</head>
+<form action="{{ url_for('index') }}" method="POST">
+	<fieldset>
+		<legend>Input values:</legend>
+		<p>
+			Pregnancies:
+			<input name="Pregnancies" type="number" step=1 required />
+		</p>
+		<p>
+			Glucose:
+			<input name="Glucose" type="number" step=1 required />
+		</p>
+		<p>
+			Blood Pressure:
+			<input name="BloodPressure" type="number" step=1 required />
+		</p>
+		<p>
+			Skin Thickness:
+			<input name="SkinThickness" type="number" step=1 required />
+		</p>
+		<p>
+			Insulin:
+			<input name="Insulin" type="number" step=1 required/>
+		</p>
+		<p>
+			BMI:
+			<input name="BMI" type="number" step=0.1 required />
+		</p>
+		<p>
+			Diabetes Pedigree Function:
+			<input name="DiabetesPedigreeFunction" type="number" step=0.001 required />
+		</p>
+		<p>
+			Age:
+			<input name="Age" type="number" step=1 required />
+		</p>
+		
+		<input type="submit" />
+	</fieldset>
+</form>
+<br>
+<div>
+	{% if result %}
+		<br>Predicted Price: <p style="font-size:20px; margin-left:30px;">{{ result }}</p>
+	{% endif %}
+</div>
+</html>
+
