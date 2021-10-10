@@ -42,14 +42,14 @@ def index():
     if request.method == 'POST':
         # get input values
         # Pregnancies,Glucose,BloodPressure,SkinThickness,Insulin,BMI,DiabetesPedigreeFunction,Age
-        pregnancies = float(request.form['Pregnancies'])
-        glucose = float(request.form['Glucose'])
-        bloodPressure = float(request.form['BloodPressure'])
-        skinThickness = float(request.form['SkinThickness'])
-        insulin = request.form['Insulin']        
+        pregnancies = int(request.form['Pregnancies'])
+        glucose = int(request.form['Glucose'])
+        bloodPressure = int(request.form['BloodPressure'])
+        skinThickness = int(request.form['SkinThickness'])
+        insulin = int(request.form['Insulin'])     
         bmi = float(request.form['BMI'])
         diabetesPedigreeFunction = float(request.form['DiabetesPedigreeFunction'])
-        age = float(request.form['Age'])
+        age = int(request.form['Age'])
         
         # convert input data to dataframe
         inputs_ = {'Pregnancies': pregnancies,
@@ -62,7 +62,7 @@ def index():
                   'Age': age
                   }
         
-        inputs_df = pd.DataFrame(inputs_)
+        inputs_df = pd.DataFrame.from_dict([inputs_])
         
         
         # preprocess the inputs

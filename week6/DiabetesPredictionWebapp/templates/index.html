@@ -3,9 +3,6 @@
 <head>
 <title>Diabetes Predictor</title>
 <style>
-div.centered{
-	text-align: center;
-}
 fieldset{
 	margin: 15px 10px;
 }
@@ -57,8 +54,10 @@ fieldset legend{
 </form>
 <br>
 <div>
-	{% if result %}
-		<br>Predicted Price: <p style="font-size:20px; margin-left:30px;">{{ result }}</p>
+	{% if result == 0 %}
+		Predicted: <p style="font-size:20px; margin-left:30px;">not diabetes</p>
+	{% elif result == 1 %}
+		Predicted: <p style="font-size:20px; margin-left:30px;">diabetes</p>
 	{% endif %}
 </div>
 </html>

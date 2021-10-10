@@ -7,7 +7,7 @@
 import numpy as np  # for manipulation
 import pandas as pd  # for data loading
 
-from sklearn.preprocessing import MinmaxScaler  # for scaling the attributes
+from sklearn.preprocessing import MinMaxScaler  # for scaling the attributes
 
 import pickle  # for importing model
 
@@ -24,7 +24,7 @@ class data_preprocessing():
         
     def fit(self, X_train):
         # scale the features
-        scaled_X_train = self.stdscale.fit_transform(X_train)
+        scaled_X_train = self.scaler.fit_transform(X_train)
         
         return scaled_X_train
         
@@ -45,21 +45,21 @@ def index():
     scaler = pickle.load(open('diabetesscaler.pkl', 'rb'))
     
     # load the dataset
-    diabetes = pd.read_csv('diabetes_data.csv')
+    diabetes = pd.read_csv('diabetes.csv')
     
     if request.method == 'GET':
         return(render_template('index.html'))
     if request.method == 'POST':
         # get input values
         # Pregnancies,Glucose,BloodPressure,SkinThickness,Insulin,BMI,DiabetesPedigreeFunction,Age
-        pregnancies = float(request.form['Pregnancies'])
-        glucose = float(request.form['Glucose'])
-        bloodPressure = float(request.form['BloodPressure'])
-        skinThickness = float(request.form['SkinThickness'])
-        insulin = request.form['Insulin']        
+        pregnancies = int(request.form['Pregnancies'])
+        glucose = int(request.form['Glucose'])
+        bloodPressure = int(request.form['BloodPressure'])
+        skinThickness = int(request.form['SkinThickness'])
+        insulin = int(request.form['Insulin'])     
         bmi = float(request.form['BMI'])
         diabetesPedigreeFunction = float(request.form['DiabetesPedigreeFunction'])
-        age = float(request.form['Age'])
+        age = int(request.form['Age'])
         
         # convert input data to dataframe
         inputs_ = {'Pregnancies': pregnancies,
@@ -72,7 +72,7 @@ def index():
                   'Age': age
                   }
         
-        inputs_df = pd.DataFrame(inputs_)
+        inputs_df = pd.DataFrame.from_dict([inputs_])
         
         
         # preprocess the inputs
@@ -86,7 +86,7 @@ def index():
         # adding the Outcome in the data for retraining
         inputs_df['Outcome'] = int(prediction[0])
         # saving to csv the new data
-        inputs_df.to_csv('diabetes_data.csv', mode='a', index=False, header=False)
+        inputs_df.to_csv('diabetes.csv', mode='a', index=False, header=False)
         # retraining
         if len(diabetes) > 40:  
             # assign the training data
