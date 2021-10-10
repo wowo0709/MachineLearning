@@ -44,9 +44,6 @@ def index():
     model = pickle.load(open('diabetesregressionmodel.pkl', 'rb'))
     scaler = pickle.load(open('diabetesscaler.pkl', 'rb'))
     
-    # load the dataset
-    diabetes = pd.read_csv('diabetes.csv')
-    
     if request.method == 'GET':
         return(render_template('index.html'))
     if request.method == 'POST':
@@ -86,7 +83,9 @@ def index():
         # adding the Outcome in the data for retraining
         inputs_df['Outcome'] = int(prediction[0])
         # saving to csv the new data
-        inputs_df.to_csv('diabetes.csv', mode='a', index=False, header=False)
+        inputs_df.to_csv('diabetes_data.csv', mode='a', index=False, header=False)
+        # load the dataset
+        diabetes = pd.read_csv('diabetes_data.csv')
         # retraining
         if len(diabetes) > 40:  
             # assign the training data
