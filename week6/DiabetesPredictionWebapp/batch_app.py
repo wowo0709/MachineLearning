@@ -7,7 +7,7 @@
 import numpy as np  # for manipulation
 import pandas as pd  # for data loading
 
-from sklearn.preprocessing import MinMaxScaler  # for scaling the attributes
+from sklearn.preprocessing import StandardScaler  # for scaling the attributes
 
 import pickle  # for importing model
 
